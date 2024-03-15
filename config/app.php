@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Blogular'),
 
     /*
     |--------------------------------------------------------------------------
@@ -173,6 +173,7 @@ return [
          * Modules Service Providers...
          */
         Modules\Admin\Providers\AdminServiceProvider::class,
+        Modules\Auth\Providers\AuthServiceProvider::class,
     ])->toArray(),
 
     /*
