@@ -13,6 +13,8 @@ class RouteServiceProvider extends ServiceProvider
 
     private string $moduleWebRoutePath = '/../Routes/web.php';
 
+    private string $moduleRoutePrefix = 'auth';
+
     public function boot()
     {
         //
@@ -27,6 +29,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware($this->moduleMiddleware)
             ->namespace($this->moduleNamespace)
+            ->prefix($this->moduleRoutePrefix)
+            ->name($this->moduleRoutePrefix . '.')
             ->group(__DIR__.$this->moduleWebRoutePath);
     }
 }

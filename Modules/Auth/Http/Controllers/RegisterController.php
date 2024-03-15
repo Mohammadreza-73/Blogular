@@ -4,10 +4,10 @@ namespace Modules\Auth\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 
-class LoginController extends Controller
+class RegisterController extends Controller
 {
     public function index()
     {
-        return view('Auth::login');
+        return view('Auth::register');
     }
 }
