@@ -5,25 +5,26 @@ namespace Modules\Auth\Tests\Feature;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RegisterTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_render_register_page(): void
     {
         $response = $this->get(route('auth.register'));
 
-        $response->assertStatus(200);
-
-        $view = $this->view('Auth::register');
-
-        $view->assertSee('Register a new account');
+        $response->assertOk();
+        $response->assertViewIs('Auth::register');
     }
 
     public function test_post_request_is_valid(): void
     {
         $this->post(route('auth.register'), $this->makeUser())
             ->assertValid()
-            ->assertSessionHasNoErrors();
+            ->assertSessionHasNoErrors()
+            ->assertRedirect();
     }
 
     public function test_name_is_required(): void
@@ -32,18 +33,21 @@ class RegisterTest extends TestCase
 
         $this->post(route('auth.register'), $this->makeUser(['name' => '']))
             ->assertInValid()
-            ->assertSessionHasErrors('name');
+            ->assertSessionHasErrors('name')
+            ->assertRedirect();
     }
 
     public function test_email_is_required_and_is_valid(): void
     {
         $this->post(route('auth.register'), $this->makeUser(['email' => '']))
             ->assertInValid()
-            ->assertSessionHasErrors('email');
+            ->assertSessionHasErrors('email')
+            ->assertRedirect();
 
         $this->post(route('auth.register'), $this->makeUser(['email' => 'example.com']))
             ->assertInValid()
-            ->assertSessionHasErrors('email');
+            ->assertSessionHasErrors('email')
+            ->assertRedirect();
     }
 
     public function test_password_is_required_and_is_valid(): void
@@ -53,20 +57,41 @@ class RegisterTest extends TestCase
             'password_confirmation' => '',            
         ]))
             ->assertInValid()
-            ->assertSessionHasErrors('password');
+            ->assertSessionHasErrors('password')
+            ->assertRedirect();
 
         $this->post(route('auth.register'), $this->makeUser([
             'password_confirmation' => Hash::make('not_matched_password'),
         ]))
             ->assertInValid()
-            ->assertSessionHasErrors('password');
+            ->assertSessionHasErrors('password')
+            ->assertRedirect();
 
         $this->post(route('auth.register'), $this->makeUser([
             'password' => '123456',  // Must be at least 8 characters
             'password_confirmation' => '123456',
         ]))
             ->assertInValid()
-            ->assertSessionHasErrors('password');
+            ->assertSessionHasErrors('password')
+            ->assertRedirect();
+    }
+
+    public function test_user_can_register(): void
+    {
+        $response = $this->post(route('auth.register'), $this->makeUser());
+
+        $response->assertRedirect();
+        $this->assertEquals(1, User::query()->count());
+    }
+
+    public function test_logged_in_user_can_not_see_register_page(): void
+    {
+        $user = User::factory()->create();
+        
+        auth()->login($user);
+
+        $this->get(route('auth.register'))
+            ->assertRedirect();
     }
 
     private function makeUser(array $attributes = []): array
