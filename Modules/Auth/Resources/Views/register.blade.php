@@ -15,7 +15,7 @@
       <form action="{{ route('auth.register') }}" method="post">
         <div class="input-group mb-3">
           @csrf
-          <input type="text" name="name" class="form-control" placeholder="Full name" required>
+          <input type="text" name="name" class="form-control" placeholder="Full name" autofocus required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>

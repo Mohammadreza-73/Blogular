@@ -9,9 +9,11 @@ class RouteServiceProvider extends ServiceProvider
 {
     private string $moduleNamespace = 'Modules\Admin\Http\Controllers';
 
-    private array $moduleMiddleware = ['web'];
+    private array $moduleMiddleware = ['web', 'auth'];
 
     private string $moduleWebRoutePath = '/../Routes/web.php';
+
+    private string $moduleRoutePrefix = 'admin';
 
     public function boot()
     {
@@ -27,6 +29,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware($this->moduleMiddleware)
             ->namespace($this->moduleNamespace)
+            ->prefix($this->moduleRoutePrefix)
+            ->name($this->moduleRoutePrefix . '.')
             ->group(__DIR__.$this->moduleWebRoutePath);
     }
 }

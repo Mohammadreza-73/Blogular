@@ -2,10 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', 'LoginController@index')->name('login');
+Route::middleware('guest')->group(function () {
+    Route::get('/register', 'RegisterController@view')->name('register');
+    Route::post('/register', 'RegisterController@register')->name('regsiter');
 
-Route::get('/forgot-password', 'ForgotPasswordController@index')->name('forgot-password');
+    Route::get('/login', 'LoginController@index')->name('login');
+    Route::post('/login', 'LoginController@login')->name('login');
 
-Route::get('/register', 'RegisterController@view')->name('register');
+    Route::get('/forgot-password', 'ForgotPasswordController@index')->name('forgot-password');
+});
 
-Route::post('/register', 'RegisterController@register')->name('');
+Route::get('/logout', 'LogoutController')->middleware('auth')->name('logout');
