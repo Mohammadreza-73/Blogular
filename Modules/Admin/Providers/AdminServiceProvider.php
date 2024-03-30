@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 class AdminServiceProvider extends ServiceProvider
 {
     private string $name = 'Admin';
+
     private string $viewPath = '/../Resources/Views';
 
     public function boot()

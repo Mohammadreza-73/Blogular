@@ -2,10 +2,10 @@
 
 namespace Modules\Auth\Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
+use Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
@@ -54,7 +54,7 @@ class RegisterTest extends TestCase
     {
         $this->post(route('auth.register'), $this->makeUser([
             'password' => '',
-            'password_confirmation' => '',            
+            'password_confirmation' => '',
         ]))
             ->assertInValid()
             ->assertSessionHasErrors('password')
@@ -87,7 +87,7 @@ class RegisterTest extends TestCase
     public function test_logged_in_user_can_not_see_register_page(): void
     {
         $user = User::factory()->create();
-        
+
         auth()->login($user);
 
         $this->get(route('auth.register'))

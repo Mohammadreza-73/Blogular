@@ -1,18 +1,18 @@
 <?php
 
-namespace Modules\Auth\Http\Requests;
+namespace Modules\Admin\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class ProfileUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->check() === true;
     }
 
     /**
@@ -23,9 +23,9 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
+            'name' => ['required', 'max:190'],
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'min:8', 'confirmed', Password::defaults()],
+            'password' => ['required', 'min:8', Password::defaults()]
         ];
     }
 }
