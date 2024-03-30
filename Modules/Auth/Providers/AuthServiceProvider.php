@@ -7,11 +7,12 @@ use Illuminate\Support\ServiceProvider;
 class AuthServiceProvider extends ServiceProvider
 {
     private string $name = 'Auth';
+
     private string $viewPath = '/../Resources/Views';
 
     public function boot()
     {
-        
+
     }
 
     public function register()

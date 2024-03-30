@@ -2,8 +2,8 @@
 
 namespace Modules\Auth\Providers;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -30,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware($this->moduleMiddleware)
             ->namespace($this->moduleNamespace)
             ->prefix($this->moduleRoutePrefix)
-            ->name($this->moduleRoutePrefix . '.')
+            ->name($this->moduleRoutePrefix.'.')
             ->group(__DIR__.$this->moduleWebRoutePath);
     }
 }
