@@ -99,7 +99,7 @@
                 <i class="fa fa-user"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <a href="#" class="dropdown-item">
+                <a href="{{ route('admin.profile') }}" class="dropdown-item">
                     Profile
                 </a>
                 <a href="{{ route('auth.logout') }}" class="dropdown-item">
