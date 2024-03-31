@@ -18,9 +18,9 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request, User $user)
     {
         $user->update([
-            'name' => $request->user_name,
-            'email' => $request->user_email,
-            'password' => $request->user_password,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
         ]);
 
         return back()->with('success', 'User Profile updated successfully.');
