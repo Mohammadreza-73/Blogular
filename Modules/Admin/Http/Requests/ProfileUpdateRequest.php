@@ -25,7 +25,7 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'max:190'],
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'min:8', Password::defaults()]
+            'password' => ['required', 'min:8', Password::defaults()],
         ];
     }
 }

@@ -34,35 +34,35 @@
                         @method('PUT')
 
                         <div class="form-group row">
-                            <label for="user_name" class="col-sm-2 col-form-label">Name</label>
+                            <label for="name" class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-10">
-                                <input type="text" name="user_name" class="form-control" id="user_name" placeholder="User Name" value="{{ old('user_name') ?? $user->name }}">
+                                <input type="text" name="name" class="form-control" id="name" placeholder="User Name" value="{{ old('name') ?? $user->name }}">
                             </div>
 
-                            @if($errors->has('user_name'))
-                            <div class="text-danger small">{{ $errors->first('user_name') }}</div>
+                            @if($errors->has('name'))
+                            <div class="text-danger small">{{ $errors->first('name') }}</div>
                             @endif
                         </div>
 
                         <div class="form-group row">
-                            <label for="user_email" class="col-sm-2 col-form-label">Email</label>
+                            <label for="email" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="email" name="user_email" class="form-control" id="user_email" placeholder="Email" value="{{ old('user_email') ?? $user->email }}">
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="{{ old('email') ?? $user->email }}">
                             </div>
 
-                            @if($errors->has('user_email'))
-                            <div class="text-danger small">{{ $errors->first('user_email') }}</div>
+                            @if($errors->has('email'))
+                            <div class="text-danger small">{{ $errors->first('email') }}</div>
                             @endif
                         </div>
 
                         <div class="form-group row">
-                            <label for="user_password" class="col-sm-2 col-form-label">Password</label>
+                            <label for="password" class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="password" name="user_password" class="form-control" id="user_password" placeholder="Password">
+                                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                             </div>
 
-                            @if($errors->has('user_password'))
-                            <div class="text-danger small">{{ $errors->first('user_password') }}</div>
+                            @if($errors->has('password'))
+                            <div class="text-danger small">{{ $errors->first('password') }}</div>
                             @endif
                         </div>
 

@@ -3,7 +3,6 @@
 namespace Modules\Admin\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Admin\Http\Requests\ProfileUpdateRequest;
 
@@ -16,12 +15,12 @@ class ProfileController extends Controller
         return view('Admin::profile', compact('user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(ProfileUpdateRequest $request, User $user)
     {
         $user->update([
-            'name' => $request->user_name,
-            'email' => $request->user_email,
-            'password' => $request->user_password,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
         ]);
 
         return back()->with('success', 'User Profile updated successfully.');
