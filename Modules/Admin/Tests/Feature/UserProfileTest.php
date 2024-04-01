@@ -14,7 +14,7 @@ class UserProfileTest extends TestCase
 
     public function test_render_profile_page(): void
     {
-        $user = User::factory()->make();
+        $user = User::factory()->create();
 
         auth()->login($user);
 
